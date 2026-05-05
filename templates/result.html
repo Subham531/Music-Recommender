@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Music Recommendations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+</head>
+<body>
+    <div class="results-container">
+        <h2>Recommendations for "{{ query }}"</h2>
+        
+        <div class="song-list">
+            {% for song in songs %}
+            <a href="{{ song['spotify_url'] }}" target="_blank" style="text-decoration: none; color: inherit;">
+                <div class="song-card">
+                    <div class="song-info">
+                        <span class="song-title">{{ song['recommended_songs'] }}</span>
+                        <div class="song-meta">
+                            {{ song['artists'] }} • {{ song['moods'] }}
+                        </div>
+                    </div>
+                    <div class="score-badge">
+                        Match: {{ (song['score'] * 100) | round | int }}%
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+        <a href="{{ url_for('home') }}" class="back-link">← Search Again</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Recommender registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <form method="POST" action="{{url_for('signup')}}" role="form">
+        <h2>Register Here</h2>
+        <input id="name"  type="text" name="name" placeholder="Name" required><br>
+        <input id="email" type="email" name="email" placeholder="Email" required><br>
+        <input id="pswd" type="password" name="password" placeholder="Password" required><br>
+        {% for message in get_flashed_messages() %}
+        <p style="color: red; margin-bottom: 10px;">{{ message }}</p>
+        {% endfor %}
+        <button id="btn" type="submit">Sign Up</button>
+        <p>Already have an account? <a href="{{url_for('login')}}">Login Here</a></p>
+    </form>
+</body>
+</html>

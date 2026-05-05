@@ -1,0 +1,108 @@
+body {
+    background-color: #f0f2f5;
+    min-height: 100vh;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: #1db954;
+    color: white;
+    font-weight: bold;
+}
+
+.logout-link {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.85;
+}
+
+.logout-link:hover {
+    opacity: 1;
+}
+
+.history-container {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+.history-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #1a1a1a;
+    border-left: 4px solid #1db954;
+    padding-left: 15px;
+}
+
+.history-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px 25px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.history-card-left h3 {
+    font-size: 1.1rem;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+}
+
+.history-card-left p {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.history-card-right {
+    font-size: 0.8rem;
+    color: #aaa;
+    text-align: right;
+}
+
+.mood-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-top: 4px;
+}
+
+.mood-happy   { background: #fff3cd; color: #856404; }
+.mood-sad     { background: #d1ecf1; color: #0c5460; }
+.mood-workout { background: #d4edda; color: #155724; }
+.mood-focus   { background: #e2e3e5; color: #383d41; }
+.mood-none    { background: #f8f9fa; color: #6c757d; }
+
+.empty-history {
+    text-align: center;
+    color: #888;
+    padding: 60px 0;
+    font-size: 1rem;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    color: #1db954;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.back-btn:hover { text-decoration: underline; }

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Recommender - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav>
+        <span>Music AI</span>
+            <div style="display:flex; gap:20px; align-items:center;">
+                <a href="{{ url_for('search_history') }}" class="logout-link">History</a>
+                <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+            </div>
+        </nav>
+
+        <main>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                    <p class="flash {{ category }}">{{ message }}</p>
+                     {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <h1>Welcome back, {{ session['name'] }}! 🎧</h1>
+            <p>What are we vibing to today?</p>
+
+            <form action="/recommend" method="POST" class="recommend-form">
+                <div class="input-group">
+                    <label for="song_name">Favorite Song</label>
+                    <input type="text" id="song_name" name="song_name" 
+                        placeholder="e.g. Blinding Lights" 
+                        autocomplete="off" required>
+                    <div id="autocomplete-list" class="autocomplete-items"></div>
+                </div>
+
+                <div class="input-group">
+                    <label for="mood">Current Mood</label>
+                    <select name="mood" id="mood">
+                        <option value="">Choose a mood (Optional)</option>
+                        <option value="happy">😊 Happy</option>
+                        <option value="sad">😢 Sad</option>
+                        <option value="workout">💪 Workout</option>
+                        <option value="focus">🧠 Focus</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="primary-btn">Get Recommendations</button>
+            </form>
+
+            <script>
+                const input = document.getElementById('song_name');
+                const list = document.getElementById('autocomplete-list');
+
+                input.addEventListener('input', function() {
+                    const query = this.value;
+                    list.innerHTML = '';
+                    
+                    if (query.length < 2) return;
+                    
+                    fetch(`/search?q=${encodeURIComponent(query)}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            data.results.forEach(song => {
+                                const item = document.createElement('div');
+                                item.textContent = song;
+                                item.addEventListener('click', function() {
+                                    input.value = song;
+                                    list.innerHTML = '';
+                                });
+                                list.appendChild(item);
+                            });
+                        });
+                });
+
+                document.addEventListener('click', function(e) {
+                    if (e.target !== input) list.innerHTML = '';
+                });
+            </script>
+        </main>
+    </div>
+</body>
+</html>

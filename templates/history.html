@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search History</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+</head>
+<body>
+    <nav>
+        <span>Music AI</span>
+        <div style="display:flex; gap:20px; align-items:center;">
+            <a href="{{ url_for('home') }}" class="logout-link">Home</a>
+            <a href="{{ url_for('search_history') }}" class="logout-link">History</a>
+            <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+        </div>
+    </nav>   
+    <div class="history-container">
+        <h2>Your Search History</h2>
+
+        {% if history %}
+            {% for entry in history %}
+            <div class="history-card">
+                <div class="history-card-left">
+                    <h3>{{ entry['song_query'] }}</h3>
+                    {% set mood = entry['mood_selected'] or 'none' %}
+                    <span class="mood-badge mood-{{ mood }}">
+                        {{ mood if mood != 'none' else 'No mood filter' }}
+                    </span>
+                </div>
+                <div class="history-card-right">
+                    {{ entry['time_stamp'].strftime('%d %b %Y') }}<br>
+                    {{ entry['time_stamp'].strftime('%I:%M %p') }}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="empty-history">No searches yet. Go find some music! 🎵</p>
+        {% endif %}
+
+        <a href="{{ url_for('home') }}" class="back-btn">← Search Again</a>
+    </div>
+</body>
+</html>
