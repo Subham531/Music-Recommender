@@ -11,10 +11,10 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = 'music_recommender@123'
+app.secret_key = os.getenv('Key')
 
-# Mongo_url = os.getenv('MONGO_URL')
-client = MongoClient('mongodb://localhost:27017/')
+Mongo_url = os.getenv('MONGO_URL')
+client = MongoClient(Mongo_url)
 db = client['music_recommender']
 users_collection = db['users']
 history = db['history']
@@ -40,7 +40,7 @@ def signup():
 
         existing_email = users_collection.find_one({'email': email})
 
-        account_exist = request.form
+        # account_exist = request.form
         if existing_email:
             flash('Email already exists', 'warning')
             return redirect(url_for('signup'))
