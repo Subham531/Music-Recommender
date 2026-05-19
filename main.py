@@ -8,6 +8,7 @@ from recommender import recommend_v2, df
 import os
 
 
+
 load_dotenv()
 
 app = Flask(__name__)
