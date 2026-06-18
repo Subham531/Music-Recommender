@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv('spotify_clean.csv')
+df = pd.read_csv('Data/spotify_clean.csv')
 feature_cols = ['danceability', 'energy','loudness', 'speechiness', 'acousticness', 'instrumentalness','liveness', 'valence', 'tempo']
 
 
